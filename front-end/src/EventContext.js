@@ -2,7 +2,7 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 
 export const EventContext = createContext()
-let baseUrl = "http://192.168.1.6:3001/"
+let baseUrl = "https://churcheventsapi.ddns.net/"
 
 export const EventProvider = (props) => {
   const [events, setEvent] = useState()
@@ -79,4 +79,4 @@ export const EventProvider = (props) => {
       {props.children}
     </EventContext.Provider>
   )
-}
+};

@@ -7,12 +7,28 @@ import { verifyUser } from "../services/auth";
 // }
 
 export const getAllEvents: RequestHandler = async (req, res, next) => {
+    console.log(`
+    __________REQUEST INFO__________
+    ${new Date().toISOString()}] ${req.ip} ${req.method} ${req.protocol}://${req.hostname}${req.originalUrl}
+    
+    __________REQUEST BODY__________`);
+
+    console.dir(req.body)
+
     let EventsInDB: Events[] = await Events.findAll();
 
     res.json(EventsInDB)
 }
 
 export const getEvent: RequestHandler = async (req, res, next) => {
+    console.log(`
+    __________REQUEST INFO__________
+    ${new Date().toISOString()}] ${req.ip} ${req.method} ${req.protocol}://${req.hostname}${req.originalUrl}
+    
+    __________REQUEST BODY__________`);
+
+    console.dir(req.body)
+
     let eventId = req.params.eventId
     let foundEvent = await Events.findByPk(eventId)
     if (foundEvent) {
@@ -23,6 +39,14 @@ export const getEvent: RequestHandler = async (req, res, next) => {
 }
 
 export const getTenEvents: RequestHandler = async (req, res, next) => {
+    console.log(`
+    __________REQUEST INFO__________
+    ${new Date().toISOString()}] ${req.ip} ${req.method} ${req.protocol}://${req.hostname}${req.originalUrl}
+    
+    __________REQUEST BODY__________`);
+
+    console.dir(req.body)
+
     const { Op } = require('sequelize');
     let query = req.params.query.toString()
     let foundEvents = await Events.findAll({
@@ -44,6 +68,14 @@ export const getTenEvents: RequestHandler = async (req, res, next) => {
 }
 
 export const createEvent: RequestHandler = async (req, res, next) => {
+    console.log(`
+    __________REQUEST INFO__________
+    ${new Date().toISOString()}] ${req.ip} ${req.method} ${req.protocol}://${req.hostname}${req.originalUrl}
+    
+    __________REQUEST BODY__________`);
+
+    console.dir(req.body)
+
     let verified = await verifyUser(req);
 
     if (verified) {
@@ -63,25 +95,35 @@ export const createEvent: RequestHandler = async (req, res, next) => {
 
 }
 
-export const updateEvent: RequestHandler = async (req, res, next) => {
-    let eventId = req.params.eventId;
-    let editedEvent: Events = req.body;
+// export const updateEvent: RequestHandler = async (req, res, next) => {
+//     console.log(`[${new Date().toISOString()}] ${req.ip} ${req.method} ${req.protocol}://${req.hostname}${req.originalUrl}`);
+    
+//     let eventId = req.params.eventId;
+//     let editedEvent: Events = req.body;
 
-    //This grabs the id from the params and makes it so it can be read in the if statement incase the request does not include the id.
-    let eventIdNum = parseInt(eventId);
+//     //This grabs the id from the params and makes it so it can be read in the if statement incase the request does not include the id.
+//     let eventIdNum = parseInt(eventId);
 
-    let matchingEvent = await Events.findByPk(eventId)
+//     let matchingEvent = await Events.findByPk(eventId)
 
-    if (matchingEvent && matchingEvent.eventId == 
-        eventIdNum && editedEvent.title && editedEvent.time && editedEvent.day && editedEvent.description && editedEvent.org && editedEvent.address) {
-        await Events.update(editedEvent, { where: {eventId: eventId} })
-        res.status(200).json();
-    } else {
-        res.status(400).json()
-    }
-}
+//     if (matchingEvent && matchingEvent.eventId == 
+//         eventIdNum && editedEvent.title && editedEvent.time && editedEvent.day && editedEvent.description && editedEvent.org && editedEvent.address) {
+//         await Events.update(editedEvent, { where: {eventId: eventId} })
+//         res.status(200).json();
+//     } else {
+//         res.status(400).json()
+//     }
+// }
 
 export const deleteEvent: RequestHandler = async (req, res, next) => {
+    console.log(`
+    __________REQUEST INFO__________
+    [${new Date().toISOString()}] ${req.ip} ${req.method} ${req.protocol}://${req.hostname}${req.originalUrl}
+    
+    __________REQUEST BODY__________`);
+
+    console.dir(req.body)
+    
     let verified = await verifyUser(req);
 
     if (verified) {
