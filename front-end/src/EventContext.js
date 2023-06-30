@@ -2,7 +2,7 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 
 export const EventContext = createContext()
-let baseUrl = "https://churcheventsapi.ddns.net/"
+let baseUrl = "http://localhost:3001/"
 
 export const EventProvider = (props) => {
   const [events, setEvent] = useState()

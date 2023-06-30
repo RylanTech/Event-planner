@@ -4,7 +4,7 @@ import { createUser, getUser, loginUser, isLoggedIn } from '../controllers/userC
 const router = Router();
 
 // router.put("/:id", editUser);
-// router.post('/', createUser);
+router.post('/', createUser);
 router.post('/login', loginUser);
 router.get("/isloggedin", isLoggedIn);
 router.get('/:id', getUser);

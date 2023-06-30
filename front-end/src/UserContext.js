@@ -2,7 +2,7 @@ import axios from "axios";
 import { createContext, useState } from "react";
 
 export const UserContext = createContext()
-let baseUrl = "https://churcheventsapi.ddns.net/"
+let baseUrl = "http://localhost:3001/"
 
 export const UserProvider = (props) => {
     const [user, setUser] = useState()
